@@ -114,7 +114,7 @@ function iconGen(desc) {
       		weatherIconEl.className += " wi-rain";
       		break;
     	case 'clouds':
- 	 		weatherIconEl.className += " wi-cloudy";
+    		weatherIconEl.className += " wi-cloudy";
       		break;
     	case 'rain':
       		weatherIconEl.className += " wi-rain";
