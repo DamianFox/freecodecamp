@@ -1,14 +1,20 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-	// Get the element id location
+
+	currentTempUnit = "°C";
+	// Get the location element
 	locationEl = document.getElementById("location");
 	locationEl.innerHTML = "Getting current position...";
 
+	// Get the description element
 	descEl = document.getElementById("desc");
 
+	// Get the temperature element
 	tempEl = document.getElementById("temp");
+
+	// Get the temperature unit element
 	tempUnitEl = document.getElementById("tempUnit");
 
-	weatherEl = document.getElementById("weather");
+	tempUnitEl.addEventListener("click", changeUnit);
 
 	weatherAPI = "https://fcc-weather-api.glitch.me/api/current";
 
@@ -52,7 +58,7 @@ function getAddressFromCoords(lat, lng) {
 						if (err !== null) {
 							console.log('Something went wrong: ' + err);
 						} else {
-							console.log('Data: ' + data.weather[0].description);
+							// console.log('Data: ' + data.weather[0].description);
 							description = data.weather[0].description;
 							descEl.innerHTML = description;
 
@@ -62,8 +68,6 @@ function getAddressFromCoords(lat, lng) {
 						}
 					}
 				);
-		  		// console.log(lat);
-	  			// console.log(lng);
 			} else {
 			  console.log("No results found");
 			}
@@ -71,6 +75,23 @@ function getAddressFromCoords(lat, lng) {
           console.log("Geocoder failed due to: " + status);
       }
     });
+}
+
+function changeUnit(){
+	var newTempEl = document.getElementById("temp").innerHTML;
+	var currentTempUnit = document.getElementById("tempUnit").innerHTML;
+	var newTempUnit = currentTempUnit == " °C" ? " °F" : " °C";
+	var newTempElValue = currentTempUnit == " °C" ? toFahrenheit(newTempEl) : toCelsius(newTempEl);
+	tempEl.innerHTML = newTempElValue;
+	tempUnit.innerHTML = newTempUnit;
+}
+
+function toFahrenheit(celsius){
+	return (celsius * 1.8) + 32;
+}
+
+function toCelsius(fahrenheit){
+	return (fahrenheit - 32) / 1.8;
 }
 
 var getJSON = function(url, callback) {
