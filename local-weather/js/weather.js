@@ -67,9 +67,6 @@ function getAddressFromCoords(lat, lng) {
 						if (err !== null) {
 							console.log('Something went wrong: ' + err);
 						} else {
-							// description = data.weather[0].description;
-							// descEl.innerHTML = description;
-
 							temp = data.main.temp;
 							tempEl.innerHTML = temp;
 							tempUnitEl.innerHTML = " °C";
@@ -119,32 +116,32 @@ function iconGen(desc) {
     	case 'rain':
       		weatherIconEl.className += " wi-rain";
       		break;
-		case 'snow':
+      	case 'snow':
       		weatherIconEl.className += " wi-snow";
       		break;
 		case 'clear':
-      		weatherIconEl.className += " wi-day-sunny";
-      		break;
+			weatherIconEl.className += " wi-day-sunny";
+			break;
 		case 'thunderstom':
-      		weatherIconEl.className += " wi-thunderstorm";
-      		break;
+			weatherIconEl.className += " wi-thunderstorm";
+			break;
 	    default:
-      		weatherIconEl.className = "wi";
+	    	weatherIconEl.className = "wi";
   	}
 }
 
 // Get JSON value from url
 var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
     xhr.responseType = 'json';
     xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
+    	var status = xhr.status;
+    	if (status === 200) {
+    		callback(null, xhr.response);
+    	} else {
+    		callback(status, xhr.response);
+    	}
     };
     xhr.send();
 };
