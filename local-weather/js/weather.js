@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
-	currentTempUnit = "°C";
+	currentTempUnit = " °C";
 	// Get the location element
 	locationEl = document.getElementById("location");
 	locationEl.innerHTML = "Getting current position...";
@@ -88,20 +88,22 @@ function getAddressFromCoords(lat, lng) {
 function changeUnit(){
 	var newTempEl = document.getElementById("temp").innerHTML;
 	var currentTempUnit = document.getElementById("temp-unit").innerHTML;
-	var newTempUnit = currentTempUnit == " °C" ? " °F" : " °C";
+	var newTempUnitEl = currentTempUnit == " °C" ? " °F" : " °C";
 	var newTempElValue = currentTempUnit == " °C" ? toFahrenheit(newTempEl) : toCelsius(newTempEl);
 	tempEl.innerHTML = newTempElValue;
-	tempUnit.innerHTML = newTempUnit;
+	tempUnitEl.innerHTML = newTempUnitEl;
 }
 
 // Celsius to Fahrenheit
 function toFahrenheit(celsius){
-	return (celsius * 1.8) + 32;
+	result = (celsius * 1.8) + 32;
+	return Number((result).toFixed(3));
 }
 
 // Fahrenheit to Celsius
 function toCelsius(fahrenheit){
-	return (fahrenheit - 32) / 1.8;
+	result = (fahrenheit - 32) / 1.8;
+	return Number((result).toFixed(3));
 }
 
 function iconGen(desc) {
