@@ -27,19 +27,25 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #2b2b2b;
+  /*background-color: #2b2b2b;*/
 }
 body {
   color: #fff;
   text-align: center;
   font-size: 1.3rem;
   font-family: "Raleway", sans-serif;
+  background: url("/img/night-sky.jpg");
+  background-size: cover;
 }
 
 h1.cover-heading {
   margin-bottom: 30px;
   font-size: 3.5rem;
   font-family: "Montserrat", sans-serif;
+}
+
+#quote {
+  font-weight: bold;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */

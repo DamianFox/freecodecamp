@@ -5,7 +5,6 @@
 	<title>Random Quote Machine</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/weather-icons.min.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
 <body>
@@ -14,9 +13,16 @@
   	<div class="site-wrapper-inner">
     	<div class="cover-container">
           <main role="main" class="inner cover">
-      		  <h1 class="cover-heading">Random Quote Machine</h1>
           	<h2 id="quote"></h2>
-            <h3 id="author"></h3>
+            <p id="author"></p>
+            <p class="lead">
+              <a class="generate" id="quote-button">
+                <button class="btn btn-lg btn-default btn-tweet" >Generate</button>
+              </a>
+              <a class="twitter" id="twitter-button">
+                <button class="btn btn-lg btn-default btn-tweet">Tweet</button>
+              </a>
+            </p>
         	</main>
 		</div>
 	</div>
