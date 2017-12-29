@@ -43,7 +43,6 @@ function createTweet() {
 	var quote = quoteEl.innerHTML;
 	var author = authorEl.innerHTML;
 	var url = 'https://twitter.com/intent/tweet?hashtags=quotes&text=' + encodeURIComponent('"' + quote + '" ' + author);
-	// 'https://twitter.com/intent/tweet?hashtags=quotes&text=' + encodeURIComponent('"' + quoteEl + '" ' + authorEl);
 	var win = window.open(url, '_blank');
   	win.focus();
 }
