@@ -132,7 +132,7 @@ function iconGen(desc) {
   	}
 }
 
-// Get JSON value from url
+// Get JSON data from url
 var getJSON = function(url, callback) {
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', url, true);
