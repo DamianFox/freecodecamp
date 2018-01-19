@@ -14,9 +14,10 @@ class Homepage extends Component {
   	getData(e) {
         e.preventDefault();
         var search = e.target.search.value;
-        var wikipediaUrl = "https://en.wikipedia.org/w/api.php?format=json&origin=*&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch="+search;
+        var wikipediaEndPoint = "https://en.wikipedia.org/w/api.php?format=json&origin=*&action=query&generator=search&gsrnamespace=0&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch="+search;
+        var wikipediaUrl = "https://en.wikipedia.org/?curid=";
 
-    	fetch(wikipediaUrl)
+    	fetch(wikipediaEndPoint)
     	.then(data => {
     		return data.json();
     	}).then(data => {
@@ -26,7 +27,12 @@ class Homepage extends Component {
     		let resultList = Object.keys(objectList).map(function(key, index) {
                 console.log(objectList[key].title);
                 return (
-                    <li key={key}>{objectList[key].title}</li>
+                    <li key={key}>
+                        <a href={wikipediaUrl+objectList[key].pageid}>
+                            <h1>{objectList[key].title}</h1>
+                            <p>{objectList[key].extract}</p>
+                        </a>
+                    </li>
                 )
             });
 
