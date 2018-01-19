@@ -4,6 +4,7 @@
   "description": "A simple wikipedia viewer",
   "main": "index.js",
   "scripts": {
+    "start":  "node index.js",
     "watch" : "webpack -d --watch",
     "build" : "webpack",
     "serve" : "serve ./dist"
