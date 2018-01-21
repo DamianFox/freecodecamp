@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 // import axios from 'axios';
 
 class Homepage extends Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 		this.state = {
 			search: ''
 		}
@@ -21,20 +21,29 @@ class Homepage extends Component {
     	.then(data => {
     		return data.json();
     	}).then(data => {
-            console.log(data.query.pages);
-            var objectList = data.query.pages;
+            var objectList = (data.hasOwnProperty("query")) ? data.query.pages : "";
+            let resultList;
 
-    		let resultList = Object.keys(objectList).map(function(key, index) {
-                console.log(objectList[key].title);
-                return (
-                    <li key={key}>
-                        <a href={wikipediaUrl+objectList[key].pageid}>
-                            <h1>{objectList[key].title}</h1>
-                            <p>{objectList[key].extract}</p>
-                        </a>
-                    </li>
-                )
-            });
+            if(objectList !== ""){
+                resultList = Object.keys(objectList).map(function(key, index) {
+                    return (
+                        <div className="item" key={objectList[key].pageid}>
+                            <a href={wikipediaUrl+objectList[key].pageid}>
+                                <h1>{objectList[key].title}</h1>
+                                <p>{objectList[key].extract}</p>
+                            </a>
+                        </div>
+                    )
+                });
+            } else {
+                resultList = (function() {
+                    return (
+                        <div className="item" key={1}>
+                            <p>No results!</p>
+                        </div>
+                    )
+                })();
+            }
 
     		this.setState({search: resultList});
     	})
@@ -46,10 +55,9 @@ class Homepage extends Component {
 	    		<h1>Wikipedia Viewer</h1>
 	    		<form onSubmit={this.getData}>
 	    			<input type="text" id="search" name="search" placeholder="Search Wikipedia" />
-	    			{/*<input type="submit" value="Click" />*/}
 	    			<button>Click</button>
 	    		</form>
-	    		<ul>{this.state.search}</ul>
+	    		<div className="items">{this.state.search}</div>
 			</div>
 		);
   	}
