@@ -22,10 +22,10 @@ class Homepage extends Component {
     		return data.json();
     	}).then(data => {
             var objectList = (data.hasOwnProperty("query")) ? data.query.pages : "";
-            let resultList;
+            let resultRender;
 
             if(objectList !== ""){
-                resultList = Object.keys(objectList).map(function(key, index) {
+                const ResultList = Object.keys(objectList).map(function(key, index) {
                     return (
                         <div className="item" key={objectList[key].pageid}>
                             <a href={wikipediaUrl+objectList[key].pageid}>
@@ -35,24 +35,27 @@ class Homepage extends Component {
                         </div>
                     )
                 });
+                resultRender = (<ResultList />)
             } else {
-                resultList = (function() {
+                const NoResult = (function() {
                     return (
                         <div className="item" key={1}>
                             <p>No results!</p>
                         </div>
                     )
-                })();
+                });
+                resultRender = (<NoResult />);
             }
 
-    		this.setState({search: resultList});
+    		this.setState({search: resultRender});
     	})
-  	}
+    }
 
 	render() {
 	    return (
 			<div className="container">
 	    		<h1>Wikipedia Viewer</h1>
+                <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random article</a>
 	    		<form onSubmit={this.getData}>
 	    			<input type="text" id="search" name="search" placeholder="Search Wikipedia" />
 	    			<button>Click</button>
