@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-// import axios from 'axios';
 
 class Homepage extends Component {
     constructor() {
@@ -14,8 +13,11 @@ class Homepage extends Component {
     getData(e) {
         e.preventDefault();
         var search = e.target.search.value;
-        var wikipediaEndPoint = "https://en.wikipedia.org/w/api.php?format=json&origin=*&action=query&generator=search&gsrnamespace=0&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch="+search;
+        var origin = "origin=*";
+        var properties = "format=json&"+origin+"&action=query&generator=search&gsrnamespace=0&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max";
+        var wikipediaEndPoint = "https://en.wikipedia.org/w/api.php?"+properties+"&gsrsearch="+search;
         var wikipediaUrl = "https://en.wikipedia.org/?curid=";
+        console.log(wikipediaEndPoint);
 
         fetch(wikipediaEndPoint)
         .then(data => {
