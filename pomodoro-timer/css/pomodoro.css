@@ -125,9 +125,19 @@ h1.cover-heading {
  * Pomodoro Timer
  */
 
-#work-time {
-  font-size: 3em;
+#message {
+  font-size: 1.2em;
   font-weight: 300;
+}
+
+#work-time {
+  font-size: 5.5em;
+  font-weight: 300;
+}
+
+button {
+  margin-bottom: 1em;
+  cursor: pointer;
 }
 
 /*
