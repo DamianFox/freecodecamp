@@ -7,7 +7,7 @@ document.getElementById("reset-btn").addEventListener("click", resetTimer);
 
 function workTimer(){
     // Update the count down every 1 second
-    let totalTime = 10;
+    let totalTime = 25*60;
     intervalID = setInterval(function() {
         
         // Time calculations for days, hours, minutes and seconds
@@ -34,7 +34,7 @@ function workTimer(){
 
 function breakTimer(){
     // Update the count down every 1 second
-    let totalTime = 5;
+    let totalTime = 5*60;
     intervalID = setInterval(function() {
         
         // Time calculations for days, hours, minutes and seconds
