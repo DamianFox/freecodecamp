@@ -22,16 +22,16 @@ class Person {
       return this.fullName;
   }
   
-  setFirstName(firstName) {
+  setFirstName(first) {
     this.firstName = firstName;
   }
   
-  setLastName(lastName) {
+  setLastName(last) {
     this.lastName = lastName;
   }
 
-  setFullName(fullName) {
-    this.fullName = fullName;
+  setFullName(firstAndLast) {
+    this.fullName = firstAndLast;
   }
 }
 
