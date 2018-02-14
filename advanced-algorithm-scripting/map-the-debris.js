@@ -6,10 +6,10 @@ function orbitalPeriod(arr) {
   	var GM = 398600.4418;
 	var earthRadius = 6367.4447;
 	
-	return arr.map(function(space) {
-		space.orbitalPeriod = transform(space.avgAlt, earthRadius, GM);
-		delete space.avgAlt;
-		return space;
+	return arr.map(function(object) {
+		object.orbitalPeriod = transform(object.avgAlt, earthRadius, GM);
+		delete object.avgAlt;
+		return object;
 	});
 }
 
