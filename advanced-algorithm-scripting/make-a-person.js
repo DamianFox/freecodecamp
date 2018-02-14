@@ -36,4 +36,4 @@ class Person {
 }
 
 var bob = new Person('Bob Ross');
-console.log(bob.getFullName());
+bob.getFullName();
