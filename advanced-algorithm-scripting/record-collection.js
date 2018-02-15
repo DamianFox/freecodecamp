@@ -24,25 +24,25 @@ var collection = {
         "album": "ABBA Gold"
     }
 };
-// Keep a copy of the collection for tests
+// A copy of the collection for tests
 var collectionCopy = JSON.parse(JSON.stringify(collection));
 
 function updateRecords(id, prop, value) {
-    // for(var i in collectionCopy) {
-    //     console.log(i);
-    // }
 
     Object.keys(collection).map(function(objectKey, index) {
         var value = collection[objectKey].album;
-        if(objectKey == id){
+        if(objectKey == id && prop == "artist"){
             collection[objectKey].artist = value;
+        } else if(objectKey == id && prop == "album"){
+            collection[objectKey].album = value;
+        } else if(objectKey == id && prop == "tracks"){
+            collection[objectKey].tracks.push(value);
         }
     });
   
     return collection;
 }
 
-// Alter values below to test your code
 updateRecords(5439, "artist", "ABBA");
 
 
