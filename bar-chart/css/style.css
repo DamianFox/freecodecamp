@@ -1,0 +1,22 @@
+.title {
+	font-size: 2.5em;
+	font-family: sans-serif;
+	color: steelblue;
+	text-align: center;
+	padding: 15px 0px 5px 0px;
+}
+
+.description {
+	font-size: 12px;
+	font-family: sans-serif;
+	color: steelblue;
+	padding: 20px;
+	text-align: center;
+}
+.bar {
+  	fill: steelblue;
+}
+
+.bar:hover {
+	fill: brown;
+}
