@@ -4,7 +4,7 @@ var margin = {top: 20, right: 20, bottom: 70, left: 40},
     height = 700 - margin.top - margin.bottom;
 
 // Parse the date / time
-var parseDate = d3.timeParse("%Y-%m-%d");
+// var parseDate = d3.timeParse("%Y-%m-%d");
 
 var svg = d3.select("svg")
     .attr("width", width + margin.left + margin.right)
@@ -22,29 +22,30 @@ d3.json(jsonUrl, function(error, data) {
   if (error) return console.warn(error);
 
   var array = data.data;
+  var l = array.length;
 
-  var x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
+  // var minDate = new Date(array[0][0]);
+  // var maxDate = new Date(array[l-1][0]);
+  // var minYear = minDate.getFullYear();
+  // var maxYear = maxDate.getFullYear();
 
-  minDate = new Date(array[0][0]);
-  maxDate = new Date(array[274][0]);
+  var x = d3.scaleBand().rangeRound([0, width]);
 
   var y = d3.scaleLinear().range([height, 0]);
     
   var xAxis = d3.axisBottom()
-      .scale(x);
+      .scale(x).ticks(d3.timeInterval(4));
 
   var yAxis = d3.axisLeft()
       .scale(y).ticks(10);
 
   array.forEach(function(d) {
-        d[0] = parseDate(d[0]);
+        d[0] = new Date(d[0]).getFullYear();
         d[1] = +d[1];
   });
 
   x.domain(array.map(function(d) { return d[0] }));
   y.domain([0, d3.max(array, function(d) { return d[1]; })]);
-
-  var description = d3.select("body").append("svg")
 
   d3.select(".description")
       .append("text")
@@ -74,7 +75,7 @@ d3.json(jsonUrl, function(error, data) {
       .data(array)
     .enter().append("rect")
       .style("fill", "steelblue")
-      .attr("x", function(d) { return x(new Date(d[0])); })
+      .attr("x", function(d) { return x(d[0]); })
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d[1]); })
       .attr("height", function(d) { return height - y(d[1]); });
