@@ -21,7 +21,7 @@ var svg = d3.select("svg")
   .attr("transform",
     "translate(140, 10)");
 
-var jsonUrl = "https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json";
+var jsonUrl = "GDP-data.json";
 
 var g = svg.append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
