@@ -1,11 +1,11 @@
 var margin = {
-    top: 20,
-    right: 20,
-    bottom: 70,
-    left: 40
+    top: 5,
+    right: 10,
+    bottom: 30,
+    left: 75
   },
-  width = 1200 - margin.left - margin.right,
-  height = 700 - margin.top - margin.bottom;
+  width = 1000 - margin.left - margin.right,
+  height = 500 - margin.top - margin.bottom;
 
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -19,7 +19,7 @@ var svg = d3.select("svg")
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform",
-    "translate(" + margin.left + "," + margin.top + ")");
+    "translate(140, 10)");
 
 var jsonUrl = "https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/GDP-data.json";
 
