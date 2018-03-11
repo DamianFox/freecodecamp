@@ -17,7 +17,6 @@ class Homepage extends Component {
         var properties = "format=json&"+origin+"&action=query&generator=search&gsrnamespace=0&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max";
         var wikipediaEndPoint = "https://en.wikipedia.org/w/api.php?"+properties+"&gsrsearch="+search;
         var wikipediaUrl = "https://en.wikipedia.org/?curid=";
-        console.log(wikipediaEndPoint);
 
         fetch(wikipediaEndPoint)
         .then(data => {
