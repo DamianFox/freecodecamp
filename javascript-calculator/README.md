@@ -8,4 +8,4 @@
 
 - ```python3 -m http.server``` - The server is started on port 8000
 
-![Todo Appp](https://raw.githubusercontent.com/DamianFox/freecodecamp/master/javascript-calculator/javascript-calculator.png | width=200)
+<img src="https://raw.githubusercontent.com/DamianFox/freecodecamp/master/javascript-calculator/javascript-calculator.png" width="150">
