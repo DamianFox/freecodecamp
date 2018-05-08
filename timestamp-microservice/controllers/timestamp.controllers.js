@@ -1,7 +1,7 @@
-var moment = require('moment');
+const moment = require('moment');
 
 // GET timestamp
-module.exports.getTime = function(req, res) {
+module.exports.getTime = (req, res) => {
 	var query = req.params.query;
 	console.log(query);
 	var unix = null;
@@ -27,10 +27,10 @@ module.exports.getTime = function(req, res) {
 		.json(resObj);
 };
 
-function unixToNatural(num){
+const unixToNatural = (num) => {
 	return moment.unix(num).format("MMMM DD, YYYY");
-}
+};
 
-function naturalToUnix(date) {
+const naturalToUnix = (date) => {
 	return moment(date, "MMMM D, YYYY").format("X");
-}
+};
