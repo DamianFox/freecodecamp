@@ -20,7 +20,7 @@ class Homepage extends Component {
             <div className="container">
             	<div className="row">
                 	<h1>Recipe Box</h1>
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#addRecipe">Primary</button>
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#addRecipe">Add Recipe</button>
                 </div>
             </div>
         );
