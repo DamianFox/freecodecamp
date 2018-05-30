@@ -14,14 +14,6 @@ a:hover {
 }
 
 /* Custom default button */
-.btn-secondary,
-.btn-secondary:hover,
-.btn-secondary:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #fff;
-  border: .05rem solid #fff;
-}
 
 h1 {
   font-size: 2rem;
@@ -92,9 +84,6 @@ body {
   margin-bottom: 30px;
 }
 
-
-}
-
 /*
  * Cover
  */
@@ -163,13 +152,18 @@ body {
 }
 
 .modal-main {
-  position:fixed;
+  position: fixed;
   background: white;
   width: 80%;
+  padding: 2em;
   height: auto;
-  top:50%;
-  left:50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%,-50%);
+}
+
+.text-black {
+  color: #000;
 }
 
 .display-block {
