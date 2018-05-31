@@ -18,7 +18,7 @@ a:hover {
 h1 {
   font-size: 2rem;
   color: #000;
-  margin-bottom: .5em;
+  margin: 0.5em auto;
 }
 
 p {
@@ -132,6 +132,10 @@ body {
   .cover-container {
     width: 100%; /* Must be percentage or pixels for horizontal alignment */
   }
+}
+
+#add-button {
+  margin: 0 auto;
 }
 
 @media (min-width: 62em) {

@@ -34,7 +34,7 @@ class Homepage extends Component {
                 	<h1>Recipe Box</h1>
                 </div>
                 <div className="row">
-                    <button className="btn btn-primary" type="button" onClick={this.showModal}>Add Recipe</button>
+                    <button id="add-button" className="btn btn-primary" type="button" onClick={this.showModal}>Add Recipe</button>
                 </div>
                 <Modal show={this.state.showModal} handleClose={this.hideModal} >
                     <p>Modal</p>
