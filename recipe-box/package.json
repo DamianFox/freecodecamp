@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "webpack -d --watch",
-    "build": "webpack"
+    "build": "webpack --mode development"
   },
   "keywords": [
     "react"
