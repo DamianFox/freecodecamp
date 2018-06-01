@@ -15,6 +15,13 @@ class Homepage extends Component {
         this.hideModal = this.hideModal.bind(this);
     }
 
+    componentDidMount(){
+        document.addEventListener("keydown", this.handleEscPress, false);
+    }
+    componentWillUnmount(){
+        document.removeEventListener("keydown", this.handleEscPress, false);
+    }
+
     showModal() {
         this.setState({ showModal: true });
     }
@@ -24,7 +31,16 @@ class Homepage extends Component {
     }
 
     addRecipe(e) {
+        console.log("Add recipe function");
+        let recipeName = e.target.recipeName.value;
+        let ingredients = e.target.ingredients.value;
         e.preventDefault();
+    }
+
+    handleEscPress = (e) => {
+        if(e.keyCode === 27 && this.state.showModal){
+            this.hideModal();
+        }
     }
 
     render() {
@@ -34,40 +50,65 @@ class Homepage extends Component {
                 	<h1>Recipe Box</h1>
                 </div>
                 <div className="row">
-                    <button id="add-button" className="btn btn-primary" type="button" onClick={this.showModal}>Add Recipe</button>
+                    <button id="show-button" className="btn btn-primary" type="button" onClick={this.showModal}>Add Recipe</button>
                 </div>
-                <Modal show={this.state.showModal} handleClose={this.hideModal} >
-                    <p>Modal</p>
-                    <p>Data</p>
+                <Modal 
+                    show={this.state.showModal} 
+                    handleClose={this.hideModal} 
+                    addRecipe={this.addRecipe}
+                    onKeyDown={this.handleEscPress}
+                    tabIndex="0">
+                    {/*<p>Modal</p>
+                    <p>Data</p>*/}
                 </Modal>
             </div>
         );
     }
 }
 
-const Modal = ({ handleClose, show, children }) => {
+const Modal = ({ handleClose, addRecipe, show, children }) => {
     const showHideClassName = show ? "modal display-block" : "modal display-none";
 
     return (
         <div className={showHideClassName}>
             <section className="modal-main">
-                <div class="modal-header">
-                    <h5 class="modal-title text-black">Add Recipe</h5>
+                <div className="modal-header">
+                    <h5 className="modal-title text-black">Add Recipe</h5>
+                    <button 
+                        type="button" 
+                        className="close" 
+                        onClick={handleClose}
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div className="form-group">
-                    <label for="recipe-name">Recipe Name</label>
-                    <input type="text" className="form-control" id="recipe-name" placeholder="Enter name" />
-                </div>
-                <div className="form-group">
-                    <label for="ingredients">Ingredients</label>
-                    <textarea className="form-control" id="ingredients" rows="3" placeholder="Ingredients"></textarea>
-                </div>
-                {/*{children}*/}
-                <button className="btn btn-secondary"
-                onClick={handleClose}
-                >
-                Close
-                </button>
+                <form onSubmit={addRecipe}>
+                    <div className="form-group">
+                        <label htmlFor="recipe-name">Recipe Name</label>
+                        <input type="text" className="form-control" id="recipe-name" name="recipeName" placeholder="Enter name" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="ingredients">Ingredients</label>
+                        <textarea 
+                            className="form-control" 
+                            id="ingredients" 
+                            name="ingredients" 
+                            rows="3" 
+                            placeholder="Enter ingredients, separated by comma">
+                        </textarea>
+                    </div>
+                    <div className="form-group text-right">
+                        <button className="btn btn-primary">
+                        Add Recipe
+                        </button>
+                        <button 
+                            className="btn btn-secondary"
+                            id="close-button"
+                            onClick={handleClose}>
+                        Close
+                        </button>
+                    </div>
+                </form>
             </section>
         </div>
     );
