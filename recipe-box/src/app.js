@@ -6,7 +6,7 @@ class Homepage extends Component {
 	constructor() {
         super();
         this.state = {
-            addRecipe: '',
+            recipes: [],
             showModal: false
         }
 
@@ -15,26 +15,13 @@ class Homepage extends Component {
         this.hideModal = this.hideModal.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount = () => {
         document.addEventListener("keydown", this.handleEscPress, false);
+        localStorage.setItem('recipes', JSON.stringify(this.state.recipes));
     }
-    componentWillUnmount(){
+    
+    componentWillUnmount = () => {
         document.removeEventListener("keydown", this.handleEscPress, false);
-    }
-
-    showModal() {
-        this.setState({ showModal: true });
-    }
-
-    hideModal() {
-        this.setState({ showModal: false });
-    }
-
-    addRecipe(e) {
-        console.log("Add recipe function");
-        let recipeName = e.target.recipeName.value;
-        let ingredients = e.target.ingredients.value;
-        e.preventDefault();
     }
 
     handleEscPress = (e) => {
@@ -43,7 +30,43 @@ class Homepage extends Component {
         }
     }
 
-    render() {
+    showModal = () => {
+        this.setState({ showModal: true });
+    }
+
+    hideModal = () => {
+        this.setState({ showModal: false });
+    }
+
+    addRecipe = (e) => {
+        e.preventDefault();
+        console.log("Add recipe function");
+        let recipeName = e.target.recipeName.value;
+        let ingrStr = e.target.ingredients.value;
+        let ingrArray = this.splitString(ingrStr);
+        console.log(ingrArray);
+
+        let newRecipe = {
+            name: recipeName, 
+            ingredients: ingrArray
+        };
+
+        this.setState((prevState) => {
+          return { 
+            recipes: prevState.recipes.concat(newRecipe)
+          };
+        });
+
+        this.hideModal();
+        e.target.recipeName.value = "";
+        e.target.ingredients.value = "";
+    }
+
+    splitString = (str) => {
+        return str.split(',');
+    }
+
+    render = () => {
         return (
             <div className="container">
             	<div className="row">
@@ -101,12 +124,12 @@ const Modal = ({ handleClose, addRecipe, show, children }) => {
                         <button className="btn btn-primary">
                         Add Recipe
                         </button>
-                        <button 
+                        {/*<button 
                             className="btn btn-secondary"
                             id="close-button"
                             onClick={handleClose}>
                         Close
-                        </button>
+                        </button>*/}
                     </div>
                 </form>
             </section>
