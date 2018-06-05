@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import RecipeItems from "./recipeItems";
 
 class Homepage extends Component {
 
-	constructor() {
-        super();
+	constructor(props) {
+        super(props);
         this.state = {
             recipes: [],
             showModal: false
@@ -17,7 +18,16 @@ class Homepage extends Component {
 
     componentDidMount = () => {
         document.addEventListener("keydown", this.handleEscPress, false);
-        localStorage.setItem('recipes', JSON.stringify(this.state.recipes));
+
+        const cachedRecipes = localStorage.getItem('recipes');
+
+        if (cachedRecipes !== null) {
+          this.setState({ items: JSON.parse(cachedRecipes) });
+        }
+    }
+
+    componentDidUpdate = () => {
+      localStorage.setItem('recipes', JSON.stringify(this.state.recipes));
     }
     
     componentWillUnmount = () => {
@@ -40,20 +50,20 @@ class Homepage extends Component {
 
     addRecipe = (e) => {
         e.preventDefault();
-        console.log("Add recipe function");
         let recipeName = e.target.recipeName.value;
         let ingrStr = e.target.ingredients.value;
         let ingrArray = this.splitString(ingrStr);
-        console.log(ingrArray);
 
         let newRecipe = {
             name: recipeName, 
             ingredients: ingrArray
         };
+        console.log(newRecipe);
 
         this.setState((prevState) => {
           return { 
-            recipes: prevState.recipes.concat(newRecipe)
+            recipes: prevState.recipes.concat(newRecipe),
+            showModal: false
           };
         });
 
@@ -84,6 +94,7 @@ class Homepage extends Component {
                     {/*<p>Modal</p>
                     <p>Data</p>*/}
                 </Modal>
+                <RecipeItems entries={this.state.recipes} />
             </div>
         );
     }
