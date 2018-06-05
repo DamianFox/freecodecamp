@@ -43,6 +43,23 @@ body {
   background-size: cover;
 }
 
+ul {
+  width: 32.314375em;
+  list-style: none;
+  margin-left: -2.5em;
+}
+
+li {
+  width: 32.314375em;
+  color: #333;
+  background-color: #fff;
+  padding: 0.9375em;
+  margin-top: 0.8375em;
+  margin-bottom: 0.8375em;
+  border-radius: 1px;
+  list-style: none;
+}
+
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;

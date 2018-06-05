@@ -22,12 +22,14 @@ class Homepage extends Component {
         const cachedRecipes = localStorage.getItem('recipes');
 
         if (cachedRecipes !== null) {
-          this.setState({ items: JSON.parse(cachedRecipes) });
+          this.setState({ recipes: JSON.parse(cachedRecipes) });
         }
     }
 
     componentDidUpdate = () => {
-      localStorage.setItem('recipes', JSON.stringify(this.state.recipes));
+        console.log("sono qui!");
+        console.log("this.state", this.state);
+        localStorage.setItem('recipes', JSON.stringify(this.state.recipes));
     }
     
     componentWillUnmount = () => {
@@ -58,7 +60,6 @@ class Homepage extends Component {
             name: recipeName, 
             ingredients: ingrArray
         };
-        console.log(newRecipe);
 
         this.setState((prevState) => {
           return { 
