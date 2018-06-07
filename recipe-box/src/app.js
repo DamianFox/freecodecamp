@@ -27,8 +27,6 @@ class Homepage extends Component {
     }
 
     componentDidUpdate = () => {
-        console.log("sono qui!");
-        console.log("this.state", this.state);
         localStorage.setItem('recipes', JSON.stringify(this.state.recipes));
     }
     
@@ -136,12 +134,6 @@ const Modal = ({ handleClose, addRecipe, show, children }) => {
                         <button className="btn btn-primary">
                         Add Recipe
                         </button>
-                        {/*<button 
-                            className="btn btn-secondary"
-                            id="close-button"
-                            onClick={handleClose}>
-                        Close
-                        </button>*/}
                     </div>
                 </form>
             </section>
