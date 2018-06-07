@@ -8,8 +8,17 @@ class RecipeItems extends Component {
   }
 
   createRecipes = (item, i) => {
-    return <li key={i}>{item.name}</li>
+    return (<div key={i} className="card">
+              <div className="card-body">
+                <h5 className="card-title">{item.name}</h5>
+                <p className="card-text">{item.ingredients}</p>
+              </div>
+            </div>)
   }
+
+  // delete(key) {
+  //   this.props.delete(key);
+  // }
  
   render() {
     var recipeEntries = this.props.entries;
