@@ -53,7 +53,6 @@ class Homepage extends Component {
         let recipeName = e.target.recipeName.value;
         let ingrStr = e.target.ingredients.value;
         let ingrArray = this.splitString(ingrStr);
-
         let newRecipe = {
             name: recipeName, 
             ingredients: ingrArray
@@ -90,8 +89,6 @@ class Homepage extends Component {
                     addRecipe={this.addRecipe}
                     onKeyDown={this.handleEscPress}
                     tabIndex="0">
-                    {/*<p>Modal</p>
-                    <p>Data</p>*/}
                 </Modal>
                 <RecipeItems entries={this.state.recipes} />
             </div>

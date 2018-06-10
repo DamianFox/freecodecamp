@@ -49,6 +49,7 @@ ul {
   list-style: none;
   margin-top: 1.875em;
   margin-left: -2.5em;
+  color: #000;
 }
 
 li {
@@ -103,6 +104,15 @@ li {
   margin-bottom: 30px;
 }
 
+.recipe-list {
+  width: 32.314375em;
+  margin-top: 1.875em;
+  margin-left: -2.5em;
+}
+
+.recipe-list > div {
+  margin-top: 1em; 
+}
 /*
  * Cover
  */

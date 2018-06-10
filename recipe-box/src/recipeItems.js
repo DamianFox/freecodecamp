@@ -8,10 +8,15 @@ class RecipeItems extends Component {
   }
 
   createRecipes = (item, i) => {
+    // console.log("item.ingredients", item.ingredients);
     return (<div key={i} className="card">
               <div className="card-body">
                 <h5 className="card-title">{item.name}</h5>
-                <p className="card-text">{item.ingredients}</p>
+                <ul className="card-text">
+                  {item.ingredients.map((element, index) => {
+                    return <li key={index}>{element}</li>;
+                  })}
+                </ul>
               </div>
             </div>)
   }
@@ -25,9 +30,9 @@ class RecipeItems extends Component {
     var listItems = recipeEntries.map(this.createRecipes);
  
     return (
-      <ul className="ul-list">
+      <div className="recipe-list">
           {listItems}
-      </ul>
+      </div>
     );
   }
 };
