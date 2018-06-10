@@ -12,7 +12,7 @@ class RecipeItems extends Component {
     return (<div key={i} className="card">
               <div className="card-body">
                 <h5 className="card-title">{item.name}</h5>
-                <ul className="card-text">
+                <ul className="card-text ingredients-list">
                   {item.ingredients.map((element, index) => {
                     return <li key={index}>{element}</li>;
                   })}
