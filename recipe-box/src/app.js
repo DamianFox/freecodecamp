@@ -12,6 +12,7 @@ class Homepage extends Component {
         }
 
         this.addRecipe = this.addRecipe.bind(this);
+        this.deleteRecipe = this.deleteRecipe.bind(this);
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
     }
@@ -52,22 +53,34 @@ class Homepage extends Component {
         e.preventDefault();
         let recipeName = e.target.recipeName.value;
         let ingrStr = e.target.ingredients.value;
-        let ingrArray = this.splitString(ingrStr);
-        let newRecipe = {
-            name: recipeName, 
-            ingredients: ingrArray
-        };
+        if (recipeName !== "" && ingrStr !== "") {
+            let ingrArray = this.splitString(ingrStr);
+            let newRecipe = {
+                key: Date.now(),
+                name: recipeName, 
+                ingredients: ingrArray
+            };
 
-        this.setState((prevState) => {
-          return { 
-            recipes: prevState.recipes.concat(newRecipe),
-            showModal: false
-          };
-        });
+            this.setState((prevState) => {
+              return { 
+                recipes: prevState.recipes.concat(newRecipe),
+                showModal: false
+              };
+            });
+            
+            e.target.recipeName.value = "";
+            e.target.ingredients.value = "";
+        }
+    }
 
-        this.hideModal();
-        e.target.recipeName.value = "";
-        e.target.ingredients.value = "";
+    deleteRecipe(key) {
+      let filteredRecipes = this.state.recipes.filter(function (recipe) {
+        return (recipe.key !== key);
+      });
+     
+      this.setState({
+        recipes: filteredRecipes
+      });
     }
 
     splitString = (str) => {
@@ -90,7 +103,7 @@ class Homepage extends Component {
                     onKeyDown={this.handleEscPress}
                     tabIndex="0">
                 </Modal>
-                <RecipeItems entries={this.state.recipes} />
+                <RecipeItems entries={this.state.recipes} delete={this.deleteRecipe} />
             </div>
         );
     }

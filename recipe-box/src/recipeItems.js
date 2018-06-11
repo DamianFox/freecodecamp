@@ -8,8 +8,14 @@ class RecipeItems extends Component {
   }
 
   createRecipes = (item, i) => {
-    // console.log("item.ingredients", item.ingredients);
-    return (<div key={i} className="card">
+    return (<div key={item.key} className="card">
+              <button 
+                  type="button" 
+                  className="close"
+                  onClick={() => this.delete(item.key)}
+                  data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
               <div className="card-body">
                 <h5 className="card-title">{item.name}</h5>
                 <ul className="card-text ingredients-list">
@@ -21,9 +27,9 @@ class RecipeItems extends Component {
             </div>)
   }
 
-  // delete(key) {
-  //   this.props.delete(key);
-  // }
+  delete = (key) => {
+    this.props.delete(key);
+  }
  
   render() {
     var recipeEntries = this.props.entries;
@@ -31,7 +37,7 @@ class RecipeItems extends Component {
  
     return (
       <div className="recipe-list">
-          {listItems}
+        {listItems}
       </div>
     );
   }

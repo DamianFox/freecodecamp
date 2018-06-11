@@ -81,6 +81,19 @@ li {
   margin-left: auto;
 }
 
+.close {
+  padding: 15px;
+  margin: -30px -30px -15px auto;
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+.close:focus {
+  outline: 0;
+}
+
 /*.items {
   margin-top: 50px;
 }
@@ -124,6 +137,14 @@ li {
   margin-bottom: 0;
   padding: 0 0 0.2375em 1.3em;
 }
+
+.card .close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  padding: 1.25rem;
+}
+
 /*
  * Cover
  */
