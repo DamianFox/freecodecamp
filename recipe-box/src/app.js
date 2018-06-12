@@ -142,7 +142,7 @@ const Modal = ({ handleClose, addRecipe, show, children }) => {
                     </div>
                     <div className="form-group text-right">
                         <button className="btn btn-primary">
-                        Add Recipe
+                            Add Recipe
                         </button>
                     </div>
                 </form>

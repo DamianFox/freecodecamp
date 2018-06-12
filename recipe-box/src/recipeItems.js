@@ -7,7 +7,7 @@ class RecipeItems extends Component {
     this.createRecipes = this.createRecipes.bind(this);
   }
 
-  createRecipes = (item, i) => {
+  createRecipes = (item) => {
     return (<div key={item.key} className="card">
               <button 
                   type="button" 
