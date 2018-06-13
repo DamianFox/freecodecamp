@@ -8,13 +8,17 @@ class Homepage extends Component {
         super(props);
         this.state = {
             recipes: [],
-            showModal: false
+            showModal: false,
+            showEditModal: false
         }
 
         this.addRecipe = this.addRecipe.bind(this);
         this.deleteRecipe = this.deleteRecipe.bind(this);
+        this.editRecipe = this.editRecipe.bind(this);
         this.showModal = this.showModal.bind(this);
+        this.showEditModal = this.showEditModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
+        this.hideEditModal = this.hideEditModal.bind(this);
     }
 
     componentDidMount = () => {
@@ -47,6 +51,14 @@ class Homepage extends Component {
 
     hideModal = () => {
         this.setState({ showModal: false });
+    }
+
+    showEditModal = () => {
+        this.setState({ showEditModal: true });
+    }
+
+    hideEditModal = () => {
+        this.setState({ showEditModal: false });
     }
 
     addRecipe = (e) => {
@@ -83,6 +95,10 @@ class Homepage extends Component {
       });
     }
 
+    editRecipe(item) {
+      console.log(item);
+    }
+
     splitString = (str) => {
         return str.split(',');
     }
@@ -103,7 +119,17 @@ class Homepage extends Component {
                     onKeyDown={this.handleEscPress}
                     tabIndex="0">
                 </Modal>
-                <RecipeItems entries={this.state.recipes} delete={this.deleteRecipe} />
+                <EditModal 
+                    show={this.state.showEditModal} 
+                    handleClose={this.hideEditModal} 
+                    addRecipe={this.editRecipe}
+                    onKeyDown={this.handleEscPress}
+                    tabIndex="0">
+                </EditModal>
+                <RecipeItems 
+                    entries={this.state.recipes} 
+                    delete={this.deleteRecipe} 
+                    showEditModal={this.showEditModal} />
             </div>
         );
     }
@@ -143,6 +169,48 @@ const Modal = ({ handleClose, addRecipe, show, children }) => {
                     <div className="form-group text-right">
                         <button className="btn btn-primary">
                             Add Recipe
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    );
+};
+
+const EditModal = ({ handleClose, editRecipe, show, children }) => {
+    const showHideClassName = show ? "modal display-block" : "modal display-none";
+
+    return (
+        <div className={showHideClassName}>
+            <section className="modal-main">
+                <div className="modal-header">
+                    <h5 className="modal-title text-black">Edit Recipe</h5>
+                    <button 
+                        type="button" 
+                        className="close" 
+                        onClick={handleClose}
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form onSubmit={editRecipe}>
+                    <div className="form-group">
+                        <label htmlFor="recipe-name">Recipe Name</label>
+                        <input type="text" className="form-control" id="recipe-name" name="recipeName" placeholder="Enter name" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="ingredients">Ingredients</label>
+                        <textarea 
+                            className="form-control" 
+                            id="ingredients" 
+                            name="ingredients" 
+                            rows="3" 
+                            placeholder="Enter ingredients, separated by comma">
+                        </textarea>
+                    </div>
+                    <div className="form-group text-right">
+                        <button className="btn btn-primary">
+                            Edit Recipe
                         </button>
                     </div>
                 </form>

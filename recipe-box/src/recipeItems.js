@@ -10,13 +10,18 @@ class RecipeItems extends Component {
   createRecipes = (item) => {
     return (<div key={item.key} className="card">
               <button 
-                  type="button" 
                   className="close"
                   onClick={() => this.delete(item.key)}
-                  data-dismiss="modal" aria-label="Close">
+                  aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>
-              <div className="card-body">
+              <button 
+                  className="edit"
+                  onClick={() => this.showEditModal(item)}
+                  aria-label="Edit">
+                  <span aria-hidden="true">&#9998;</span>
+              </button>
+              <div className="card-body" onClick={() => this.edit(item)}>
                 <h5 className="card-title">{item.name}</h5>
                 <ul className="card-text ingredients-list">
                   {item.ingredients.map((element, index) => {
@@ -29,6 +34,10 @@ class RecipeItems extends Component {
 
   delete = (key) => {
     this.props.delete(key);
+  }
+
+  showEditModal = (item) => {
+    this.props.showEditModal(item);
   }
  
   render() {
