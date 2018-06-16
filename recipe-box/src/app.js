@@ -9,7 +9,8 @@ class Homepage extends Component {
         this.state = {
             recipes: [],
             showModal: false,
-            showEditModal: false
+            showEditModal: false,
+            recipeToEdit: ''
         }
 
         this.addRecipe = this.addRecipe.bind(this);
@@ -42,6 +43,7 @@ class Homepage extends Component {
     handleEscPress = (e) => {
         if(e.keyCode === 27 && this.state.showModal){
             this.hideModal();
+            this.hideEditModal();
         }
     }
 
@@ -53,8 +55,18 @@ class Homepage extends Component {
         this.setState({ showModal: false });
     }
 
-    showEditModal = () => {
-        this.setState({ showEditModal: true });
+    showEditModal = (item) => {
+        let name = item.name;
+        let ingredients = item.ingredients;
+        let ingrStr = ingredients.join(", ");
+        let recipeObj = {
+            name: name,
+            ingrStr: ingrStr
+        }
+        this.setState({ 
+            showEditModal: true,
+            recipeToEdit: recipeObj
+        });
     }
 
     hideEditModal = () => {
@@ -95,8 +107,8 @@ class Homepage extends Component {
       });
     }
 
-    editRecipe(item) {
-      console.log(item);
+    editRecipe(e) {
+        e.preventDefault();
     }
 
     splitString = (str) => {
@@ -124,6 +136,7 @@ class Homepage extends Component {
                     handleClose={this.hideEditModal} 
                     addRecipe={this.editRecipe}
                     onKeyDown={this.handleEscPress}
+                    state={this.state}
                     tabIndex="0">
                 </EditModal>
                 <RecipeItems 
@@ -135,7 +148,7 @@ class Homepage extends Component {
     }
 }
 
-const Modal = ({ handleClose, addRecipe, show, children }) => {
+const Modal = ({ handleClose, addRecipe, show }) => {
     const showHideClassName = show ? "modal display-block" : "modal display-none";
 
     return (
@@ -177,8 +190,9 @@ const Modal = ({ handleClose, addRecipe, show, children }) => {
     );
 };
 
-const EditModal = ({ handleClose, editRecipe, show, children }) => {
+const EditModal = ({ handleClose, editRecipe, show, state }) => {
     const showHideClassName = show ? "modal display-block" : "modal display-none";
+    console.log(state);
 
     return (
         <div className={showHideClassName}>
@@ -196,7 +210,12 @@ const EditModal = ({ handleClose, editRecipe, show, children }) => {
                 <form onSubmit={editRecipe}>
                     <div className="form-group">
                         <label htmlFor="recipe-name">Recipe Name</label>
-                        <input type="text" className="form-control" id="recipe-name" name="recipeName" placeholder="Enter name" />
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            id="recipe-name" name="recipeName" 
+                            placeholder="Enter name"
+                            value={state.recipeToEdit.name || ''} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="ingredients">Ingredients</label>
@@ -205,7 +224,8 @@ const EditModal = ({ handleClose, editRecipe, show, children }) => {
                             id="ingredients" 
                             name="ingredients" 
                             rows="3" 
-                            placeholder="Enter ingredients, separated by comma">
+                            placeholder="Enter ingredients, separated by comma"
+                            value={state.recipeToEdit.ingrStr || ''} >
                         </textarea>
                     </div>
                     <div className="form-group text-right">
