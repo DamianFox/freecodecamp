@@ -10,7 +10,8 @@ class Homepage extends Component {
             recipes: [],
             showModal: false,
             showEditModal: false,
-            recipeToEdit: ''
+            recipeToEditName: '',
+            recipeToEditIngr: ''
         }
 
         this.addRecipe = this.addRecipe.bind(this);
@@ -59,13 +60,14 @@ class Homepage extends Component {
         let name = item.name;
         let ingredients = item.ingredients;
         let ingrStr = ingredients.join(", ");
-        let recipeObj = {
-            name: name,
-            ingrStr: ingrStr
-        }
+        // let recipeObj = {
+        //     name: name,
+        //     ingrStr: ingrStr
+        // }
         this.setState({ 
             showEditModal: true,
-            recipeToEdit: recipeObj
+            recipeToEditName: name,
+            recipeToEditIngr: ingrStr,
         });
     }
 
@@ -115,6 +117,11 @@ class Homepage extends Component {
         return str.split(',');
     }
 
+    onChangeTextArea = (e) => {
+        console.log(e);
+        this.setState({ recipeToEditIngr : e.target.value })
+    }
+
     render = () => {
         return (
             <div className="container">
@@ -136,6 +143,7 @@ class Homepage extends Component {
                     handleClose={this.hideEditModal} 
                     addRecipe={this.editRecipe}
                     onKeyDown={this.handleEscPress}
+                    onChange={this.onChangeTextArea}
                     state={this.state}
                     tabIndex="0">
                 </EditModal>
@@ -190,9 +198,8 @@ const Modal = ({ handleClose, addRecipe, show }) => {
     );
 };
 
-const EditModal = ({ handleClose, editRecipe, show, state }) => {
+const EditModal = ({ handleClose, editRecipe, show, state, onChange }) => {
     const showHideClassName = show ? "modal display-block" : "modal display-none";
-    console.log(state);
 
     return (
         <div className={showHideClassName}>
@@ -215,7 +222,7 @@ const EditModal = ({ handleClose, editRecipe, show, state }) => {
                             className="form-control" 
                             id="recipe-name" name="recipeName" 
                             placeholder="Enter name"
-                            value={state.recipeToEdit.name || ''} />
+                            value={state.recipeToEditName || ''} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="ingredients">Ingredients</label>
@@ -225,7 +232,8 @@ const EditModal = ({ handleClose, editRecipe, show, state }) => {
                             name="ingredients" 
                             rows="3" 
                             placeholder="Enter ingredients, separated by comma"
-                            value={state.recipeToEdit.ingrStr || ''} >
+                            onChange={onChange}
+                            value={state.recipeToEditIngr || ''} >
                         </textarea>
                     </div>
                     <div className="form-group text-right">
