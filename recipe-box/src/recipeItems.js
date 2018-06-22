@@ -21,7 +21,7 @@ class RecipeItems extends Component {
                   aria-label="Edit">
                   <span aria-hidden="true">&#9998;</span>
               </button>
-              <div className="card-body" onClick={() => this.edit(item)}>
+              <div className="card-body">
                 <h5 className="card-title">{item.name}</h5>
                 <ul className="card-text ingredients-list">
                   {item.ingredients.map((element, index) => {
