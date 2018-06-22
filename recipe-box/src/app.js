@@ -44,7 +44,9 @@ class Homepage extends Component {
     handleEscPress = (e) => {
       if(e.keyCode === 27 && this.state.showModal){
           this.hideModal();
-          this.hideEditModal();
+      }
+      if(e.keyCode === 27 && this.state.showEditModal){
+        this.hideEditModal();
       }
     }
 
@@ -164,7 +166,7 @@ class Homepage extends Component {
           </Modal>
           <EditModal 
             show={this.state.showEditModal} 
-            handleClose={this.hideEditModal} 
+            handleEditClose={this.hideEditModal} 
             editRecipe={this.editRecipe}
             onKeyDown={this.handleEscPress}
             onChange={this.onChangeTextArea}
@@ -222,7 +224,7 @@ const Modal = ({ handleClose, addRecipe, show }) => {
   );
 };
 
-const EditModal = ({ handleClose, editRecipe, show, state, onChange }) => {
+const EditModal = ({ handleEditClose, editRecipe, show, state, onChange }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 
   return (
@@ -233,7 +235,7 @@ const EditModal = ({ handleClose, editRecipe, show, state, onChange }) => {
                 <button 
                     type="button" 
                     className="close" 
-                    onClick={handleClose}
+                    onClick={handleEditClose}
                     data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
